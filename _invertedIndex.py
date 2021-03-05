@@ -1,7 +1,7 @@
 import csv 
 import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('punkt')
 
 from nltk.corpus import stopwords  
 from nltk.tokenize import word_tokenize 
@@ -21,7 +21,7 @@ def parse_corpus():
     stop_words = set(stopwords.words('english'))
     stop_words.update(set(stopwords.words('portuguese')))
     
-    with open("./twitter_corpus/full-corpus.csv", encoding='utf8') as file:
+    with open("./twitter_corpus/full-corpus.csv") as file:
         data = csv.reader(file)
         terms = set()
         next(data)

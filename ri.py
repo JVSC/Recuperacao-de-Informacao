@@ -9,8 +9,9 @@ from nltk.stem import RSLPStemmer
 
 from os import listdir
 from os.path import isfile, join
+import json
 
-mypath = 'C:\\Users\\Gabriel\\Desktop\\Algoritmo - Recuperação da Informação\\Obras'
+mypath = './Obras'
 
 def rem_dup(seq, idfun=None): 
    if idfun is None:
@@ -28,6 +29,8 @@ temporario = []
 
 def inverted_index(sentencas_processadas, terms):
     inverted_index = dict()
+    print(f'Termos: {len(terms)}, sentenças: {len(sentencas_processadas)}')
+    i = 0
     for term in terms:
         inverted_index[term] = {"obras":[], "sentencas": []}
         for index, sentenca in enumerate(sentencas_processadas):
@@ -35,20 +38,19 @@ def inverted_index(sentencas_processadas, terms):
                 if term in s:
                     inverted_index[term]["obras"].append(sentenca['id'])
                     inverted_index[term]["sentencas"].append((sentenca['id'], i))
+        i = i +1 
     return inverted_index
 
 def rem_dup_index(inverted_index, terms):
     for term in terms:
         inverted_index[term]['obras'] = list(dict.fromkeys(inverted_index[term]['obras']))
     return inverted_index
-    
 
-nltk.download('machado')
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('rslp')
+#nltk.download('machado')
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('rslp')
 
-#documento = nltk.corpus.machado.raw('romance/marm08.txt')
 documentos = []
 
 print('Começo de leitura de arquivos...')
@@ -96,18 +98,23 @@ print('Iniciando indexação...')
 index = inverted_index(sentencas_processadas, vocab)
 index = rem_dup_index(index, vocab)
 
+with open('./indexed/index.json', 'w') as fp:
+    json.dump(index, fp)
 print('Finalizado indexação...')
 
 print('Iniciando processo de Stemming...')
 stemmer = RSLPStemmer()
 tokens_stemming = [stemmer.stem(t) for t in vocab]
 tokens_after_stemming = rem_dup(tokens_stemming)
-
 print('Finalizado processo de Stemming...')
 print('Indexando após Stemming...')
 
 index_stemming = inverted_index(sentencas_processadas, tokens_after_stemming)
 index_stemming = rem_dup_index(index_stemming, tokens_after_stemming)
+
+
+with open('./indexed/index_stemmed.json', 'w') as fp:
+    json.dump(index_stemming, fp)
 
 print('Finzalizado processo após Stemming...')
 
@@ -120,8 +127,6 @@ print('Finzalizado processo após Stemming...')
 # for i in index_stemming:
 #     file_index_stemming.write(f'index(size): {i}({len(index_stemming)}) -> {index_stemming[i]}\n')
 
-
-arquivo.close()
 #file_index.close()
 # file_index_stemming.close()
 

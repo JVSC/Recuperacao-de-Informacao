@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 nltk = "*"
+pandas = "*"
+seaborn = "*"
 
 [dev-packages]
 

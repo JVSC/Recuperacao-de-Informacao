@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --color-black: #1B1E25;
+  --color-black-soft: #20232B;
+  --color-white: #f8f8ff;
+  --color-grey: #d0d3d2;
+  --color-gold: #fac461;
+  --color-red: #dc3c2e;
+}
+
+.banner {
+  padding: 10px;
+  color: var(--color-white);
+  background: var(--color-black-soft);
+}
+
+.content {
+  padding: 10px;
+}

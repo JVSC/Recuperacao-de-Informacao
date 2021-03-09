@@ -2,6 +2,8 @@ import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import RSLPStemmer
 
+import json
+
 from os import listdir
 from os.path import isfile, join
 
@@ -25,11 +27,21 @@ class Indexer:
 
     def carregar_documentos(self, link_documentos):
         files = [f for f in listdir(link_documentos) if isfile(join(link_documentos, f))]
+        indexed_ID = []
+        index_lookup = {}
+        filename_lookup = {}
+
         print(f'- Carregando documentos')
         for index, file in enumerate(files):
             with open(f'Obras/{file}', 'r', encoding='unicode_escape') as arquivo:
                 self.documentos.append({"id": index, "obra": arquivo.read()})
-
+                indexed_ID.append(index)
+                index_lookup[index] = file
+                filename_lookup[file] = index
+        
+        with open('./indexed/config.json', 'w') as f:
+            json.dump({'doc_index': indexed_ID, 'index_lookup': index_lookup, 'filename_lookup': filename_lookup}, f)
+        
     def processar_sentencas(self):
         print("Processando sentenças")
         for index, documento in enumerate(self.documentos):

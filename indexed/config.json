@@ -1,0 +1,13 @@
+{
+  "doc_index": [0, 1, 2],
+  "index_lookup": {
+    "0": "Memorias Postumas de Bras Cubas.txt",
+    "1": "Quincas Borba.txt",
+    "2": "Dom Casmurro.txt"
+  },
+  "filename_lookup": {
+    "Memorias Postumas de Bras Cubas.txt": 0,
+    "Quincas Borba.txt": 1,
+    "Dom Casmurro.txt": 2
+  }
+}

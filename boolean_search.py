@@ -67,7 +67,6 @@ def or_operation(p1, p2):
     docs = []
     p1_index = 0
     p2_index = 0
-    print(len(p1), len(p2))
     while(p1_index < len(p1) or p2_index < len(p2)):
         
         if(p1_index < len(p1) and p2_index < len(p2)):
@@ -121,7 +120,6 @@ def find(query):
     while(query):
         res = []
         token = query.popleft()
-        print(token)
         if token == 'and':
             right_exp = findings.pop()
             left_exp = findings.pop()
@@ -140,7 +138,6 @@ def find(query):
             with open("./indexed/config.json") as data:
                 d = json.load(data)
                 docs = d['doc_index']
-                print(docs)
             res = not_operation(exp, docs)
         
         else:

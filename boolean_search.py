@@ -146,19 +146,25 @@ def find(query):
                 res = index[token]['obras']
 
         findings.append(res)
-    return findings.pop()
+    if not findings:
+        return findings
+    else:
+        return findings.pop()
 
-busca = input("Busca: ")
-busca = word_tokenize(busca.lower())
+def pesquisa_booleana(entrada):
+    busca = word_tokenize(entrada.lower())
 
-query = shunting_yard_parser(busca)
+    query = shunting_yard_parser(busca)
 
-docs = find(deque(query))
+    docs = find(deque(query))
 
-print("- Resultados")
-doc_table = {}
-with open('./indexed/config.json') as f:
-    d = json.load(f)
-    doc_table = d['index_lookup']
-for doc in docs:
-    print(f'--> {doc_table[str(doc)]}')
+    print("- Resultados")
+    doc_table = {}
+    results = []
+    with open('./indexed/config.json') as f:
+        d = json.load(f)
+        doc_table = d['index_lookup']
+    for doc in docs:
+        print(f'--> {doc_table[str(doc)]}')
+        results.append(doc_table[str(doc)])
+    return results

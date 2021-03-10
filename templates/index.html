@@ -12,9 +12,28 @@
 <body>
     <h1 class="banner"> Recuperação de Informação </h1>
     <div class="content">
-        <p> Corpus selecionado: "{{ info.nome }}"" </p>
-        <p> Sobre o corpus: {% autoescape false %} {{ info.detalhes }} {% endautoescape %} </p>
+        <div class="info">
+            <p> Corpus selecionado: "{{ info.nome }}" </p>
+            <p> Sobre o corpus: {% autoescape false %} {{ info.detalhes }} {% endautoescape %} </p>
+        </div>
+        <div class="query">
+            <form action="{{ url_for('pesquisa') }}" method="POST" enctype="multipart/form-data">
+                <label class="query__label">Busca: </label>
+                <input class="query__input" type="text" name="pesquisa_booleana" />
+                <button type="submit">Pesquisar</button>
+            </form>
+        </div>
+        <h3>Resultados</h3>
+        <hr />
+        <div class="results">
+            {% for item in list %}
+            <p>{{item}}</p>
+            {% else %}
+            <p>Nada ainda, por enquanto.</p>
+            {% endfor %}
+        </div>
     </div>
+
 </body>
 
 </html>

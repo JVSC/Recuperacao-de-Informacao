@@ -146,6 +146,7 @@ def find(query):
                 res = index[token]['obras']
 
         findings.append(res)
+    # caso esteja vazio, retornar a lista vazia, já que geram problemas ao tentar dar pop em list vazia
     if not findings:
         return findings
     else:
@@ -158,13 +159,13 @@ def pesquisa_booleana(entrada):
 
     docs = find(deque(query))
 
-    print("- Resultados")
+    # print("- Resultados")
     doc_table = {}
     results = []
     with open('./indexed/config.json') as f:
         d = json.load(f)
         doc_table = d['index_lookup']
     for doc in docs:
-        print(f'--> {doc_table[str(doc)]}')
+        # print(f'--> {doc_table[str(doc)]}')
         results.append(doc_table[str(doc)])
     return results

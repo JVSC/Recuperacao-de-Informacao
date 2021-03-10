@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <title>Matrizes</title>
+  </head>
+
+  <body>
+    <h1 class="banner">Recuperação de Informação</h1>
+    {% if data == 0 %}
+    <div class="container">
+        <p><a href="{{ url_for('index') }}">Voltar para o início.</a></p>
+    <h3>Gráfico</h3>
+    <hr/>
+    <div class="plot">
+      <img
+        src="{{ url_for('static', filename='images/plot.png') }}"
+        alt="plot"
+      />
+      {% else %}
+      <p>A matriz não foi carregada.</p>
+      {% endif %}
+    </div>
+</div>
+  </body>
+</html>

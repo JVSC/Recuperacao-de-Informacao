@@ -3,6 +3,7 @@ import seaborn as sns
 from os import listdir
 import math
 import json
+import matplotlib.pyplot as plt
 
 mypath = "./Obras"
 
@@ -76,8 +77,17 @@ def build_matrizes():
 
     df_frequency_matrix = pd.DataFrame (frequency_matrix, columns = terms_frequency)
     df_tf_idf_matrix = pd.DataFrame (tf_idf_matrix_var, columns = terms_tf_idf)
+    df_frequency_matrix = df_frequency_matrix.T
+    df_tf_idf_matrix = df_tf_idf_matrix.T
 
     sns.set()
+    
     #parametros para definir min e max de escala de valores: vmin=0, vmax=0.5
-    #ax1 = sns.heatmap(df_frequency_matrix)
-    #ax2 = sns.heatmap(df_tf_idf_matrix) 
+    # ax1 = sns.heatmap(df_frequency_matrix)
+    # ax2 = sns.heatmap(df_tf_idf_matrix)
+
+    path = "./static/images/plot.png"
+    if plt.savefig(path):
+        return 1
+    else:
+        return 0

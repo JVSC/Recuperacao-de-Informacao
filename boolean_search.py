@@ -8,13 +8,10 @@ def shunting_yard_parser(tokens):
     stack = []
     left_parenthesis = '('
     right_parenthesis = ')'
-    precedence = {
-        'not':3,
-        'and':2,
-        'or':1,
-        '(': 0,
-        ')':0
-    }
+    precedence = {}
+    with open('./indexed/config.json') as f: 
+        d = json.load(f)
+        precedence = d['precedence_table']
 
     for token in tokens:
         if token not in precedence:

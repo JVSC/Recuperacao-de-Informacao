@@ -1,4 +1,5 @@
 import json
+import numpy 
 
 def remove_duplicatas(seq, idfun=None): 
    if idfun is None:
@@ -48,3 +49,9 @@ def shunting_yard_parser(tokens):
         output.append(stack.pop())
 
     return output
+
+def angle_distance(arr1, arr2):
+    unit1 = arr1 / numpy.linalg.norm(arr1)
+    unit2 = arr2 / numpy.linalg.norm(arr2)
+    dot_product = numpy.dot(unit1, unit2)
+    return numpy.arccos(dot_product)

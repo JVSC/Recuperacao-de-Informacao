@@ -40,7 +40,7 @@ class Indexer:
                 filename_lookup[file] = index
         
         with open('./indexed/config.json', 'w') as f:
-            json.dump({'doc_index': indexed_ID, 'index_lookup': index_lookup, 'filename_lookup': filename_lookup}, f)
+            json.dump({'doc_index': indexed_ID, 'index_lookup': index_lookup, 'filename_lookup': filename_lookup, "precedence_table": {"(": 0,")": 0,"not": 3,"and": 2,"or": 1}}, f)
         
     def processar_sentencas(self):
         print("Processando sentenças")

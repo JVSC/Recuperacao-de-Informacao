@@ -46,6 +46,7 @@ def tf_idf_matrix(frequency_matrix):
     return tf_idf_matrix
 
 def build_matrizes():
+    print('Montando matrizes...')
     index_stemming = open('./indexed/index_stemmed.json', 'r', encoding='utf8')
     index_json = json.load(index_stemming)
     index_stemming.close()
@@ -83,8 +84,8 @@ def build_matrizes():
     sns.set()
     
     #parametros para definir min e max de escala de valores: vmin=0, vmax=0.5
-    # ax1 = sns.heatmap(df_frequency_matrix)
-    # ax2 = sns.heatmap(df_tf_idf_matrix)
+    ax1 = sns.heatmap(df_frequency_matrix)
+    #ax2 = sns.heatmap(df_tf_idf_matrix)
 
     path = "./static/images/plot.png"
     if plt.savefig(path):

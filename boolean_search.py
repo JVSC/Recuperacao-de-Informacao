@@ -6,8 +6,8 @@ import json
  
 
 class BooleanModel:
-    def __init__(self, max_distance=False):
-        entrada = input("Busca: ")
+    def __init__(self, entrada, max_distance=False):
+        # entrada = input("Busca: ")
         busca = word_tokenize(entrada.lower())
         self.query = deque(shunting_yard_parser(busca))
         self.max_distance = max_distance
@@ -132,5 +132,3 @@ class BooleanModel:
             elif(p1_index + 1 < len(p1)):
                 p1_index = p1_index + 1
         return docs
-
-print(BooleanModel().run())

@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',    filename='css/index.css') }}"
-    />
-    <title>Recuperador de Informação</title>
-  </head>
 
-  <body>
-    <h1 class="banner">Recuperação de Informação</h1>
-    <div class="container">
-      <div class="info">
-        <p>Corpus selecionado: "{{ info.nome }}"</p>
-        <p>
-          Sobre o corpus: {% autoescape false %} {{ info.detalhes }} {%
-          endautoescape %}
-        </p>
-      </div>
-      <form action="{{ url_for('graph') }}">
-        <button type="submit">Visualizar matrizes de frequência</button>
-      </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/index.css') }}" />
+  <title>Recuperador de Informação</title>
+</head>
 
-      <div class="query">
-        <form
-          action="{{ url_for('pesquisa') }}"
-          method="POST"
-          enctype="multipart/form-data"
-        >
-          <label class="query__label">Busca: </label>
-          <input class="query__input" type="text" name="pesquisa_booleana" />
-          <button type="submit">Pesquisar</button>
-        </form>
-      </div>
-      <h3>Resultados</h3>
-      <hr />
-      <div class="results">
-        {% if list != 0 %} {% for item in list %}
-        <p>{{item}}</p>
-        {% else %}
-        <p>Nenhum resultado.</p>
-        {% endfor %} {% else %}
-        <p>Nada ainda, por enquanto.</p>
-        {% endif %}
-      </div>
+<body>
+  <h1 class="banner">Recuperação de Informação</h1>
+  <div class="container">
+    <div class="info">
+      <p>Corpus selecionado: "{{ info.nome }}"</p>
+      <p>
+        Sobre o corpus: {% autoescape false %} {{ info.detalhes }} {%
+        endautoescape %}
+      </p>
     </div>
-  </body>
+    <form action="{{ url_for('graph') }}">
+      <button type="submit">Visualizar matrizes de frequência</button>
+    </form>
+
+    <div class="query">
+      <form action="{{ url_for('pesquisa') }}" method="POST" enctype="multipart/form-data">
+        <table class="query__table">
+          <tr>
+            <td>
+              <label class="query__label">Busca "booleana": </label>
+            </td>
+            <td>
+              <input class="query__input" type="text" name="pesquisa_booleana" />
+            </td>
+            <td>
+              <button type="submit">Pesquisar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="query__label">Busca "vetorial": </label>
+            </td>
+            <td>
+              <input class="query__input" type="text" name="pesquisa_vetorial" />
+            </td>
+            <td>
+              <button type="submit">Pesquisar</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <h3>Resultados</h3>
+    <hr />
+    <div class="results">
+      {% if type == 'booleana' %} {% for item in result %}
+      <p>{{item}}</p>
+      {% endfor %} {% elif type == 'vetorial' %}
+      <p>{{result}}</p>
+      {% elif result != 0 %}
+      <p>No results found.</p>
+      {% else %}
+      <p>Nada ainda, por enquanto.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+
 </html>

@@ -68,27 +68,43 @@ def build_matrizes():
     with open('./scoring/tf_idf_matrix.json', 'w', encoding='utf8') as fp:
         json.dump(tf_idf_matrix_var, fp)
 
-    terms_frequency = []
-    for term in frequency_matrix:
-        terms_frequency.append(term)
-
     terms_tf_idf = []
     for term in tf_idf_matrix_var:
         terms_tf_idf.append(term)
-
-    df_frequency_matrix = pd.DataFrame (frequency_matrix, columns = terms_frequency)
+        
+    # terms_frequency = []
+    # for term in frequency_matrix:
+    #     terms_frequency.append(term)
+        
+    # terms_wtd = []
+    # for term in wtd_matrix_var:
+    #     terms_wtd.append(term)
+        
+    # terms_idf = []
+    # for term in idf_matrix_var:
+    #     terms_idf.append(term)
+        
     df_tf_idf_matrix = pd.DataFrame (tf_idf_matrix_var, columns = terms_tf_idf)
-    df_frequency_matrix = df_frequency_matrix.T
+    # df_frequency_matrix = pd.DataFrame (frequency_matrix, columns = terms_frequency)
+    # df_wtd_matrix = pd.DataFrame (wtd_matrix_var, columns = terms_wtd)
+    # df_idf_matrix = pd.DataFrame (idf_matrix_var, columns = terms_idf)
+    
     df_tf_idf_matrix = df_tf_idf_matrix.T
+    # df_frequency_matrix = df_frequency_matrix.T
+    # df_wtd_matrix = df_wtd_matrix.T
+    # df_idf_matrix = df_idf_matrix.T
 
     sns.set()
-    
     #parametros para definir min e max de escala de valores: vmin=0, vmax=0.5
-    ax1 = sns.heatmap(df_frequency_matrix)
-    #ax2 = sns.heatmap(df_tf_idf_matrix)
-
-    path = "./static/images/plot.png"
+    
+    # ax1 = sns.heatmap(df_frequency_matrix, vmin=0, vmax=1)
+    # ax3 = sns.heatmap(df_idf_matrix, vmin=0, vmax=1)
+    # ax4 = sns.heatmap(df_wtd_matrix, vmin=0, vmax=1)
+    
+    ax2 = sns.heatmap(df_tf_idf_matrix, vmin=0, vmax=1)        
+    path = "./static/images/tf_idf_frequency.png"
     if plt.savefig(path):
         return 1
     else:
         return 0
+    

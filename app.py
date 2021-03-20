@@ -24,10 +24,11 @@ def pesquisa():
         query = request.form['pesquisa_vetorial']
         results = pesquisa_vetorial(query)
         tipo = 'vetorial'
+        print(results)
     return render_template('index.html', info=data, result=results, type=tipo )
 
-@app.route('/graph', methods=['GET'])
-def graph():
-    result = build_matrizes()
-    return render_template('graph.html', data=result)
+# @app.route('/graph', methods=['GET'])
+# def graph():
+#     result = build_matrizes()
+#     return render_template('graph.html', data=result)
     
